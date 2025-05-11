@@ -1,0 +1,26 @@
+en
+conf t
+hostname SR
+
+int fa0/0
+ip add 1.1.1.1 255.255.255.0
+no shut
+ex
+
+int se1/0
+ip add 1.1.2.1 255.255.255.0
+no shut
+ex
+end
+
+show ip interface 
+
+config 
+router ospf 1
+network 1.1.1.0 0.0.0.0.3 area 0
+network 1.1.2.0 0.0.0.0.3 area 0
+ex
+end
+
+show ip ospf 
+show ip ospf neighbor 
