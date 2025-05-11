@@ -1,0 +1,32 @@
+en
+conf t
+hostname BR
+
+int se1/0
+ip add 1.1.2.2 255.255.255.0
+no shut 
+ex
+
+int se1/1
+ip add 1.1.3.1 255.255.255.0
+no shut 
+ex
+
+int se1/2
+ip add 1.1.4.1 255.255.255.0
+no shut
+ex
+end
+
+show ip interface brief
+
+conf t
+router ospf 1 
+network 1.1.2.0 0.0.0.255 area 0
+network 1.1.3.0 0.0.0.255 area 0
+network 1.1.4.0 0.0.0.255 area 0
+ex
+end
+
+show ip ospf 
+show ip ospf neighbor
