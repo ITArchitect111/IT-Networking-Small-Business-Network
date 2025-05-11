@@ -22,6 +22,7 @@ The configuration includes **Dynamic Host Configuration Protocol (DHCP)**, **Voi
 - **Server Router.txt**
 - **Bridge Router.txt**
 - **Network Router.txt**
+- **Standby Router.txt**
 - **Core Switch.txt**
 - **Front Desk.txt**
 - **Back Office.txt**
