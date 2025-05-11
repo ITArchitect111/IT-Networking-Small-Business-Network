@@ -1,0 +1,29 @@
+en
+conf t
+hostname FD
+
+vlan 2
+name FD
+ex
+
+vlan 10
+name Voice
+ex
+
+int range fa0/1-3
+switchport mode trunk 
+ex
+
+int range fa0/4-24
+switchport mode access 
+switchport access vlan 2
+switchport voice vlan 10
+ex
+
+int range fa0/4-24
+switchport port-security 
+switchport port-security mac-address sticky
+switchport port-security violation restrict 
+switchport port-security maximum 2
+ex
+
