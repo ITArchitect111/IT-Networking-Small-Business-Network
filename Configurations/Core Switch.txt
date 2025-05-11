@@ -1,0 +1,23 @@
+en
+conf t
+hostname CoreSwitch
+
+vlan 2
+name FD
+ex
+
+vlan 3
+name BO
+ex
+
+vlan 4
+name Guest
+ex
+
+vlan 10
+name Voice
+ex
+
+int range fa0/1-24
+switchport mode trunk 
+ex
