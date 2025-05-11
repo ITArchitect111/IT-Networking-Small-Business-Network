@@ -1,0 +1,24 @@
+en
+conf t
+hostname Guest
+
+vlan 4
+name Guest 
+ex
+
+int range fa0/1-3
+switchport mode trunk 
+ex
+
+int range fa0/4-24
+switchport mode access 
+switchport access vlan 4
+ex
+
+int range fa0/4-24
+switchport port-security 
+switchport port-security mac-address sticky
+switchport port-security violation restrict 
+switchport port-security maximum 100
+ex
+
