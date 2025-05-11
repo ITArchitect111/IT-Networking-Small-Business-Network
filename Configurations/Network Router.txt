@@ -1,0 +1,291 @@
+en 
+conf t 
+hostname NR
+
+int se1/0
+ip add 1.1.3.2 255.255.255.0
+no shut
+ex
+
+int fa0/0
+no shut 
+ex
+
+int fa0/0.2
+encapsulation dot1q 2
+ip add 192.168.125.225 255.255.255.224
+ex
+
+int fa0/0.3
+encapsulation dot1q 3
+ip add 192.168.125.193 255.255.255.224
+ex
+
+int fa0/0.4
+encapsulation dot1q 4
+ip add 192.168.125.1 255.255.255.128
+ex
+
+int fa0/0.10
+encapsulation dot1q 10
+ip add 192.168.125.129  255.255.255.192
+ex
+
+router ospf 1 
+network 1.1.3.0 0.0.0.255 area 0
+network 192.168.125.0 0.0.0.255 area 0
+network 192.168.125.128 0.0.0.255 area 0
+network 192.168.125.192 0.0.0.255 area 0
+network 192.168.125.224 0.0.0.255 area 0
+ex
+
+ip dhcp pool FD
+network 192.168.125.224 255.255.255.224
+default-router 192.168.125.225
+dns-server 1.1.1.2
+ex
+
+ip dhcp pool BO
+network 192.168.125.192 255.255.255.224
+default-router 192.168.125.193
+dns-server 1.1.1.2
+ex
+
+ip dhcp pool Guest
+network 192.168.125.0 255.255.255.128
+default-router 192.168.125.1
+dns-server 1.1.1.2
+ex
+
+ip dhcp pool Voice 
+network 192.168.125.128 255.255.255.192
+default-router 192.168.125.129
+option 150 ip 192.168.125.129
+ex
+end
+
+show ip ospf 
+show ip ospf neighbor 
+
+conf t
+telephony-service 
+max-ephones 40
+max-dn 40
+auto-assign 1 to 40
+ip source-address 192.168.125.129
+ex
+
+ephone-dn 1
+number 101
+ex
+
+ephone-dn 2
+number 102
+ex
+
+ephone-dn 3
+number 103
+ex
+
+ephone-dn 4
+number 104
+ex
+
+ephone-dn 5
+number 105
+ex
+
+ephone-dn 6
+number 106
+ex
+
+ephone-dn 7
+number 107
+ex
+
+ephone-dn 8
+number 108
+ex
+
+ephone-dn 9
+number 109
+ex
+
+ephone-dn 10
+number 110
+ex
+
+ephone-dn 11
+number 111
+ex
+
+ephone-dn 12
+number 112
+ex
+
+ephone-dn 13
+number 113
+ex
+
+ephone-dn 14
+number 114
+ex
+
+ephone-dn 15
+number 115
+ex
+
+ephone-dn 16
+number 116
+ex
+
+ephone-dn 17
+number 117
+ex
+
+ephone-dn 18
+number 118
+ex
+
+ephone-dn 19
+number 119
+ex
+
+ephone-dn 20
+number 120
+ex
+
+ephone-dn 21
+number 121
+ex
+
+ephone-dn 22
+number 122
+ex
+
+ephone-dn 23
+number 123
+ex
+
+ephone-dn 24
+number 124
+ex
+
+ephone-dn 25
+number 125
+ex
+
+ephone-dn 26
+number 126
+ex
+
+ephone-dn 27
+number 127
+ex
+
+ephone-dn 28
+number 128
+ex
+
+ephone-dn 29
+number 129
+ex
+
+ephone-dn 30
+number 130
+ex
+
+ephone-dn 31
+number 131
+ex
+
+ephone-dn 32
+number 132
+ex
+
+ephone-dn 33
+number 133
+ex
+
+ephone-dn 34
+number 134
+ex
+
+ephone-dn 35
+number 135
+ex
+
+ephone-dn 36
+number 136
+ex
+
+ephone-dn 37
+number 137
+ex
+
+ephone-dn 38
+number 138
+ex
+
+ephone-dn 39
+number 139
+ex
+
+ephone-dn 40
+number 140
+ex
+
+show ephone 
+
+int fa0/0.2
+standby version 2
+standby 2 ip 192.168.125.254
+standby 2 priority 110
+standby 2 preempt
+ex
+
+int fa0/0.3
+standby version 3
+standby 3 ip 192.168.125.222
+standby 3 priority 110
+standby 3 preempt
+ex
+
+int fa0/0.4
+standby version 
+standby 4 ip 192.168.125.126
+standby 4 priority 110
+standby 4 preempt
+ex
+
+int fa0/0.10
+standby version 10
+standby 10 ip 192.168.125.190
+standby 10 priority 110
+standby 10 preempt
+ex
+
+enable secret NR123
+ip domain-name it-web.ph
+no ip domain lookup
+service password-encryption
+username NetworkRouter secret NR123
+
+
+line vty 0 4
+password IT-Router111
+exec-timeout 6 0
+transport input ssh
+login local 
+exit
+
+line console 0
+password IT-NR123
+logging synchronous 
+exec-timeout 6 0
+login
+exit
+
+banner motd "Only IT Support personnel are authorized to use Network Router"
+
+ex
