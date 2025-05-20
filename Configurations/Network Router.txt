@@ -71,8 +71,8 @@ conf t
 telephony-service 
 max-ephones 40
 max-dn 40
-auto-assign 1 to 40
-ip source-address 192.168.125.129
+auto assign 1 to 40
+ip source-address 192.168.125.129 port 2000
 ex
 
 ephone-dn 1
