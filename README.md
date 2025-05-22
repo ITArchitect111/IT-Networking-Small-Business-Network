@@ -1,4 +1,4 @@
-# IT-Networking-Small-Business-Neywork
+# IT-Networking-Small-Business-Network
 
 ## Description
 This project demonstrates a complete network topology setup using:
